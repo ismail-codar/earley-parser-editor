@@ -1,0 +1,30 @@
+{
+	"name": "earley-parser-editor",
+	"version": "0.0.1",
+	"description": "earley parser editor",
+	"main": "index.html",
+	"repository": "https://github.com/ismail-codar/earley-parser-editor.git",
+	"author": "ismail codar <icodar@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html",
+		"test": "jasmine-ts \"/Users/macbook/DEV/GitHub/earley-parser-editor/**/*.spec.ts\""
+	},
+	"dependencies": {
+		"@fjsx/runtime": "/Users/macbook/DEV/GitHub/fjsx",
+		"jquery": "^3.3.1"
+	},
+	"devDependencies": {
+		"@fjsx/babel-plugin-transform-fjsx-syntax": "/Users/macbook/DEV/GitHub/fjsx/packages/babel-plugin-transform-fjsx-syntax",
+		"@types/jasmine": "^2.8.9",
+		"@types/node": "^10.12.1",
+		"@types/react": "^16.4.18",
+		"jasmine": "^3.3.0",
+		"jasmine-spec-reporter": "^4.2.1",
+		"jasmine-ts": "^0.3.0",
+		"parcel-bundler": "^1.10.3",
+		"ts-node": "^7.0.1",
+		"typescript": "^3.1.4"
+	}
+}
