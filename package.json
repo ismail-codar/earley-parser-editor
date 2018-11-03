@@ -13,13 +13,21 @@
 	},
 	"dependencies": {
 		"@fjsx/runtime": "/Users/macbook/DEV/GitHub/fjsx",
+		"between.js": "^0.1.2-fix.2",
+		"cssobj": "^1.3.6",
 		"jquery": "^3.3.1"
 	},
 	"devDependencies": {
-		"@fjsx/babel-plugin-transform-fjsx-syntax": "/Users/macbook/DEV/GitHub/fjsx/packages/babel-plugin-transform-fjsx-syntax",
+		"@babel/core": "^7.1.2",
+		"@babel/preset-env": "^7.1.0",
+		"@babel/preset-react": "^7.0.0",
+		"@babel/preset-typescript": "^7.1.0",
+		"@fjsx/babel-plugin-transform-fjsx-syntax": "^0.0.1",
+		"@fjsx/transform-fjsx-syntax": "/Users/macbook/DEV/GitHub/fjsx/packages/babel-plugin-transform-fjsx-syntax",
 		"@types/jasmine": "^2.8.9",
 		"@types/node": "^10.12.1",
 		"@types/react": "^16.4.18",
+		"@types/web-animations-js": "^2.2.6",
 		"jasmine": "^3.3.0",
 		"jasmine-spec-reporter": "^4.2.1",
 		"jasmine-ts": "^0.3.0",
