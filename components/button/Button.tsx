@@ -1,9 +1,8 @@
 import { rippleEffect } from '../../utils/ripple-effect';
-import { MouseEvent } from 'react';
 
 export interface ButtonProps {
 	variant?: 'primary' | 'secondary' | 'danger' | 'info' | 'success' | 'warning' | 'dark' | 'light';
-	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+	onClick?: (e: Fjsx.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = (props: ButtonProps) => {
