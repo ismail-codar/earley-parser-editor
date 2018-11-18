@@ -17,6 +17,18 @@ export const ProgressCircular = (props: {
 	};
 	const normalizedValue$ = props.value$ < 0 ? 0 : props.value$ > 100 ? 100 : props.value$;
 	const strokeDashOffset$ = (100 - normalizedValue$) / 100 * circumference() + 'px';
+	const genCircle = (name: string, offset$: string | number) => (
+		<circle
+			fill="transparent"
+			cx={2 * _this.viewBoxSize()}
+			cy={2 * _this.viewBoxSize()}
+			r={radius()}
+			stroke-width={_this.strokeWidth()}
+			stroke-dasharray={_this.strokeDashArray()}
+			stroke-dashoffset={offset$}
+			className={'v-progress-circular__' + name}
+		/>
+	);
 
 	const _this = new class {
 		value$ = props.value$;
@@ -56,25 +68,15 @@ export const ProgressCircular = (props: {
 		}
 	}();
 
-	const genCircle = (name: string, offset$: string | number) => (
-		<circle
-			fill="transparent"
-			cx={2 * _this.viewBoxSize()}
-			cy={2 * _this.viewBoxSize()}
-			r={radius()}
-			stroke-width={_this.strokeWidth()}
-			stroke-dasharray={_this.strokeDashArray()}
-			stroke-dashoffset={offset$}
-			className={'v-progress-circular__' + name}
-		/>
-	);
+	const circle1 = _this.indeterminate ? null : genCircle('underlay', 0);
+	const circle2 = genCircle('overlay', strokeDashOffset$);
 
 	return (
 		<div
 			role="progressbar"
 			aria-valuemin={0}
 			aria-valuemax={100}
-			// aria-valuenow={_this.indeterminate ? undefined : normalizedValue$}
+			aria-valuenow={_this.indeterminate ? undefined : normalizedValue$}
 			className={classNames({ 'v-progress-circular': true }, _this.classes())}
 			style={_this.styles()}
 		>
@@ -83,9 +85,9 @@ export const ProgressCircular = (props: {
 					_this.viewBoxSize()}`}
 				style={_this.svgStyles()}
 			>
-				{/* {_this.indeterminate ? null : genCircle('underlay', 0)}
-				{genCircle('overlay', strokeDashOffset$)} */}
-				<circle
+				{circle1}
+				{circle2}
+				{/* <circle
 					fill="transparent"
 					cx={2 * _this.viewBoxSize()}
 					cy={2 * _this.viewBoxSize()}
@@ -104,7 +106,7 @@ export const ProgressCircular = (props: {
 					stroke-dasharray={_this.strokeDashArray()}
 					stroke-dashoffset={strokeDashOffset$}
 					className={'v-progress-circular__' + 'overlay'}
-				/>
+				/> */}
 			</svg>
 			<div className="v-progress-circular__info" />
 		</div>
