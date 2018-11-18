@@ -10,6 +10,33 @@
             "name": "setitor-jasmine-ts",
             "program": "${workspaceFolder}/node_modules/jasmine-ts/lib/index.js",
             "args": ["${file}"]
+          },
+          {
+            "type": "node",
+            "request": "launch",
+            "name": "server.ts",
+            "args": [
+              "server.ts"
+            ],
+            "runtimeArgs": [
+              "-r",
+              "ts-node/register"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "outputCapture": "console"
+          },
+          {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug App",
+            "program": "/Users/macbook/DEV/GitHub/earley-parser-editor/node_modules/parcel-bundler/bin/cli.js",
+            "env": {
+              "PARCEL_WORKERS": "0" // Run workers in same thread for debugging
+            },
+            "args": [
+              "index.html" // Your entry point (e.g. parcel <entry>)
+            ]
           }
     ]
 }

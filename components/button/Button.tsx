@@ -1,3 +1,4 @@
+import '@fjsx/runtime';
 import { rippleEffect } from '../../utils/ripple-effect';
 
 export interface ButtonProps {

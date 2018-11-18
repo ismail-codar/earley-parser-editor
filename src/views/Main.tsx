@@ -1,21 +1,21 @@
-import { Button } from '../../components/button/Button';
-import { Select } from '../../components/select/Select';
+import VProgressCircular from '../../components/vue/vuetify/VProgressCircular/VProgressCircular';
+import { ProgressCircular } from '../../components/vue/vuetify/VProgressCircular/ProgressCircular';
 
 export const Main = () => {
+	let value$ = 10;
+	setInterval(() => {
+		value$ = value$ + 10;
+		if (value$ > 100) {
+			value$ = 0;
+		}
+	}, 1000);
 	return (
 		<div>
-			<Button variant="secondary">Buton 2</Button>
-			<Select
-				button={
-					<Button onClick={(e) => console.log(e)} variant="primary">
-						Dropdown 1
-					</Button>
-				}
-			/>
-			<span className="chip">Chip Label</span>
-			<span className="chip">
-				<i className="chip-icon">C</i>Chip Label
-			</span>
+			{/* <VProgressCircular value="60" indeterminate={true} /> */}
+			<ProgressCircular value$={value$} />
+			{/* <ProgressCircular value$={40} />
+			<ProgressCircular value$={60} />
+			<ProgressCircular value$={60} indeterminate={true} /> */}
 		</div>
 	);
 };
