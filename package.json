@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fidanjs/jsx": "^0.0.6",
+    "@types/classnames": "^2.2.7",
     "between.js": "^0.1.2-fix.2",
     "classnames": "^2.2.6",
     "cssobj": "^1.3.6"

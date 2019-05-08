@@ -135,6 +135,10 @@
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@fidanjs/runtime/-/runtime-0.0.21.tgz#856f159dd738f8e543be45157970853adceee39a"
 
+"@types/classnames@^2.2.7":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.7.tgz#fb68cc9be8487e6ea5b13700e759bfbab7e0fefd"
+
 "@types/prop-types@*":
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
