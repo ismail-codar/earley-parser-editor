@@ -1,0 +1,29 @@
+.graph {
+  .svg {
+    border: solid 1px gray;
+    margin-left: 2px;
+    margin-top: 20px;
+  }
+
+  .node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+    cursor: move;
+    fill: rgb(31, 119, 180);
+  }
+
+  .link {
+    stroke: #999;
+    stroke-width: 3px;
+    stroke-opacity: 1;
+  }
+
+  .label {
+    fill: white;
+    font-family: Verdana;
+    font-size: 25px;
+    text-anchor: middle;
+    cursor: move;
+    user-select: none;
+  }
+}

@@ -1,10 +1,10 @@
-import { INode } from "../types";
+import { INode, ChildsType } from "../types";
 import { value, FidanArray } from "@fidanjs/runtime";
 
 const choice = (text: string, childs: INode[]): INode => {
   return {
     text: value(text),
-    childsType: value("choice"),
+    childsType: value<ChildsType>("choice"),
     childs: value(childs) as FidanArray<INode[]>
   };
 };
@@ -12,7 +12,7 @@ const choice = (text: string, childs: INode[]): INode => {
 const ordered = (text: string, childs: INode[]): INode => {
   return {
     text: value(text),
-    childsType: value("ordered"),
+    childsType: value<ChildsType>("ordered"),
     childs: value(childs) as FidanArray<INode[]>
   };
 };
@@ -20,7 +20,7 @@ const ordered = (text: string, childs: INode[]): INode => {
 const val = (text: string): INode => {
   return {
     text: value(text),
-    childsType: value("value"),
+    childsType: value<ChildsType>("value"),
     childs: null
   };
 };

@@ -1,7 +1,10 @@
 import { Node } from "./Node";
 import { value } from "@fidanjs/runtime";
+import { ROOT_NODE } from "../store";
+import { Graph } from "./graph/Graph";
 
 export const Editor = () => {
+  console.log(JSON.parse(JSON.stringify(ROOT_NODE(), null, 1)));
   return (
     <div>
       <Node text="Root" childsType={value("choice")} />
@@ -36,6 +39,7 @@ export const Editor = () => {
           </tr>
         </tbody>
       </table>
+      <Graph />
     </div>
   );
 };

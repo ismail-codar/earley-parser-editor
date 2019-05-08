@@ -9,14 +9,16 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
-    "test": "jasmine-ts \"/Users/macbook/DEV/GitHub/earley-parser-editor/**/*.spec.ts\""
+    "test": "jasmine-ts \"/Users/macbook/DEV/GitHub/earley-parser-editor/**/*.spec.ts\"",
+    "yalc-link": "yalc link @fidanjs/runtime & yalc link @fidanjs/jsx & yalc link @fidanjs/babel-plugin-fidan-jsx & yalc link @fidanjs/integration-react"
   },
   "dependencies": {
     "@fidanjs/jsx": "^0.0.6",
     "@types/classnames": "^2.2.7",
     "between.js": "^0.1.2-fix.2",
     "classnames": "^2.2.6",
-    "cssobj": "^1.3.6"
+    "cssobj": "^1.3.6",
+    "webcola": "^3.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
