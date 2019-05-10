@@ -3,6 +3,7 @@ import { LayoutAdaptor } from "./layout-adaptor";
 import { injectToProperty, value, compute, FidanArray } from "@fidanjs/runtime";
 import { jsxArrayMap } from "@fidanjs/jsx";
 import "./graph.scss";
+import { TEST1 } from "../../_tmp/test1";
 
 interface IGraphNode {
   x: number;
@@ -24,8 +25,10 @@ const GraphNode = (props: IGraphNode) => {
     <g>
       <rect
         className="node"
-        width="60"
+        width="260"
         height="40"
+        // width={props.width}
+        // height={props.height}
         rx="5"
         ry="5"
         x={compute(() => propX() - props.width / 2)}
@@ -64,12 +67,21 @@ const GraphLink = (props: { source: IGraphNode; target: IGraphNode }) => {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var cola = new LayoutAdaptor(960, 500);
 
-var graphData = require("./sample-data/fivenodesdisconnected.json");
+// var graphData = require("./sample-data/fivenodesdisconnected.json");
+const graphData = TEST1();
+// cola
+//   .nodes(graphData.nodes)
+//   .links(graphData.links)
+//   .start();
 cola
+  .avoidOverlaps(true)
+  .flowLayout("x", 50)
+  .flowLayout("y", 80)
+  .size([1200, 800])
   .nodes(graphData.nodes)
   .links(graphData.links)
+  .jaccardLinkLengths(150)
   .start();
-console.log(graphData);
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var pt = null;
 var svg = null;
@@ -125,8 +137,8 @@ export const Graph = () => {
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         className="svg"
-        width="960"
-        height="500"
+        width="100%"
+        height="800"
       >
         <g
           {...jsxArrayMap(links, (link: any) => <GraphLink {...link} /> as any)}
@@ -134,16 +146,6 @@ export const Graph = () => {
         <g
           {...jsxArrayMap(nodes, (node: any) => <GraphNode {...node} /> as any)}
         />
-        {/* {graphData() === null ? null : (
-          <>
-            {graphData().links.map(link => (
-              <GraphLink {...link} />
-            ))}
-            {graphData().nodes.map(node => (
-              <GraphNode {...node} />
-            ))}
-          </>
-        )} */}
       </svg>
     </div>
   );

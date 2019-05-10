@@ -25,7 +25,7 @@ const val = (text: string): INode => {
   };
 };
 
-export const sampleData = (): INode => {
+export const sampleData1 = (): INode => {
   /**
      * https://jsfiddle.net/2mb3w9c1/4/embedded/result/
      * 
@@ -113,5 +113,19 @@ export const sampleData = (): INode => {
   return choice("S", [
     ordered("CUMLE_SADE", [OZNE, YUKLEM]),
     ordered("CUMLE_YARDIMCILI", [OZNE, YARDIMCI, YUKLEM])
+  ]);
+};
+
+export const sampleData = (): INode => {
+  const YUKLEM_KOK = choice("YUKLEM_KOK", [val("ye"), val("gel")]);
+
+  // TODO ozne alt grupları
+  const OZNE = choice("OZNE", [val("ahmet"), val("ben"), val("sen")]);
+
+  const YUKLEM = choice("YUKLEM", []);
+
+  return choice("S", [
+    ordered("CUMLE_SADE", [OZNE, YUKLEM]),
+    ordered("CUMLE_YARDIMCILI", [])
   ]);
 };
