@@ -7,13 +7,14 @@
   "author": "ismail codar <icodar@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "start": "parcel index.html --no-cache",
+    "build": "parcel build index.html --no-cache",
     "test": "jasmine-ts \"/Users/macbook/DEV/GitHub/earley-parser-editor/**/*.spec.ts\"",
     "yalc-link": "yalc link @fidanjs/runtime & yalc link @fidanjs/jsx & yalc link @fidanjs/babel-plugin-fidan-jsx & yalc link @fidanjs/integration-react"
   },
   "dependencies": {
-    "@fidanjs/jsx": "^0.0.6",
+    "@fidanjs/jsx": "^0.0.7",
+    "@fidanjs/runtime": "^0.0.22",
     "@types/classnames": "^2.2.7",
     "between.js": "^0.1.2-fix.2",
     "classnames": "^2.2.6",

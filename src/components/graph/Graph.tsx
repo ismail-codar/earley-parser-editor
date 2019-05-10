@@ -20,10 +20,6 @@ const GraphNode = (props: IGraphNode) => {
   injectToProperty(props, "x", propX);
   injectToProperty(props, "y", propY);
 
-  compute(() => {
-    console.log(propX(), propY());
-  });
-
   return (
     <g>
       <rect
