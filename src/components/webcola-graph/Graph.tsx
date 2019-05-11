@@ -83,7 +83,11 @@ cola
   .size([1200, 800])
   .nodes(graphData.nodes)
   .links(graphData.links)
-  .jaccardLinkLengths(100)
+  // .jaccardLinkLengths(100)
+  .avoidOverlaps(true)
+  .flowLayout("x", 130)
+  .flowLayout("y", 60)
+  .symmetricDiffLinkLengths(36)
   .start();
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var pt = null;
@@ -149,6 +153,18 @@ export const Graph = () => {
         <g
           {...jsxArrayMap(nodes, (node: any) => <GraphNode {...node} /> as any)}
         />
+        <defs>
+          <marker
+            id="end-arrow"
+            viewBox="0 -5 10 10"
+            refX="25"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+          >
+            <path d="M0,-5L10,0L0,5L2,0" stroke-width="0px" fill="#000" />
+          </marker>
+        </defs>
       </svg>
     </div>
   );

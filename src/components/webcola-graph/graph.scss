@@ -7,12 +7,15 @@
     stroke: #fff;
     stroke-width: 1.5px;
     cursor: move;
+    z-index: 0;
   }
 
   .link {
     stroke: #999;
     stroke-width: 3px;
     stroke-opacity: 1;
+    marker-end: url(#end-arrow);
+    z-index: 1;
   }
 
   .label {
