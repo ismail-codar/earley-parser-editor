@@ -11,11 +11,14 @@ const nodeList = (data: INode): INode[] => {
   let childs = [data];
   while (childs.length > 0) {
     const child = childs.shift();
+    child.isSelected = value(false);
     const text = child.text();
     if (!nodes.find(n => n.text() === text)) {
       nodes.push(child);
       if (child.childs) {
-        childs.push.apply(childs, child.childs());
+        child.childs().forEach(c => {
+          childs.push(c);
+        });
       }
     }
   }
@@ -39,6 +42,7 @@ const addChild = (node: INode) => {
 };
 
 const allNodes = value(nodeList(ROOT_NODE())) as FidanArray<INode[]>;
+let lastSelected: INode = null;
 
 export const Editor = () => {
   return (
@@ -56,14 +60,26 @@ export const Editor = () => {
             allNodes,
             node => {
               if (!node.childs) return <></>; // TODO return null
+
               return (
-                <tr>
+                <tr
+                  className={compute(() =>
+                    node.childs().find(c => c.isSelected()) !== undefined
+                      ? "any-child-selected-node"
+                      : ""
+                  )}
+                >
                   <td>
                     {
                       <input
                         type="text"
+                        className={compute(() =>
+                          node.isSelected() ? "selected-input" : ""
+                        )}
                         value={node.text()}
                         size={compute(() => node.text().length + 5)}
+                        onFocus={() => node.isSelected(true)}
+                        onBlur={() => node.isSelected(false)}
                         onInput={e => node.text(e.target["value"])}
                       />
                     }
@@ -95,7 +111,19 @@ export const Editor = () => {
                         child => {
                           return (
                             <span>
-                              <span>{child.text()}</span>
+                              <span
+                                onClick={() => {
+                                  if (lastSelected)
+                                    lastSelected.isSelected(false);
+                                  child.isSelected(true);
+                                  lastSelected = child;
+                                }}
+                                className={compute(() =>
+                                  child.isSelected() ? "selected-node" : ""
+                                )}
+                              >
+                                {child.text()}
+                              </span>
                               <span style={{ fontSize: "40px" }}>
                                 {compute(() => {
                                   return node.childsType() === "choice"

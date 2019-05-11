@@ -16,3 +16,22 @@
   background-color: beige;
   display: inline-block;
 }
+
+input {
+  display: inline-block;
+}
+
+.selected-node {
+  background-color: darkblue;
+  color: white;
+  padding: 4px;
+  padding-bottom: 0px;
+}
+
+.selected-input {
+  border-color: aqua;
+}
+
+.any-child-selected-node {
+  background-color: lightgray;
+}
