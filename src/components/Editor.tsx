@@ -1,4 +1,3 @@
-import { Node } from "./Node";
 import { value, FidanArray, compute } from "@fidanjs/runtime";
 import { ROOT_NODE } from "../store";
 import { Graph } from "./webcola-graph/Graph";
@@ -96,10 +95,7 @@ export const Editor = () => {
                         child => {
                           return (
                             <span>
-                              <Node
-                                childsType={child.childsType}
-                                text={child.text}
-                              />
+                              <span>{child.text()}</span>
                               <span style={{ fontSize: "40px" }}>
                                 {compute(() => {
                                   return node.childsType() === "choice"
