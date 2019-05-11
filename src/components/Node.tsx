@@ -6,11 +6,13 @@ export const Node = (props: {
   childsType: FidanValue<ChildsType>;
 }) => {
   return (
-    <input
-      type="text"
-      className={"node-" + props.childsType}
-      value={props.text()}
-      onInput={e => props.text(e.target["value"])}
-    />
+    // <input
+    //   type="text"
+    //   className={compute(() => "node-" + props.childsType())}
+    //   value={props.text()}
+    //   size={compute(() => props.text().length + 5)}
+    //   onInput={e => props.text(e.target["value"])}
+    // />
+    <span>{props.text()}</span>
   );
 };

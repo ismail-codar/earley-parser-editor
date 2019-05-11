@@ -2,7 +2,8 @@ import { LayoutAdaptor } from "./layout-adaptor";
 import { inject, value, compute, FidanArray } from "@fidanjs/runtime";
 import { jsxArrayMap } from "@fidanjs/jsx";
 import "./graph.scss";
-import { TEST1 } from "../../_tmp/test1";
+import { nodeToGraph } from "./util";
+import { sampleData } from "../../data/sample-data";
 
 interface IGraphNode {
   x: number;
@@ -63,7 +64,7 @@ const GraphLink = (props: { source: IGraphNode; target: IGraphNode }) => {
 var cola = new LayoutAdaptor(960, 500);
 
 // var graphData = require("./sample-data/fivenodesdisconnected.json");
-const graphData = TEST1();
+const graphData = nodeToGraph(sampleData());
 // cola
 //   .nodes(graphData.nodes)
 //   .links(graphData.links)
