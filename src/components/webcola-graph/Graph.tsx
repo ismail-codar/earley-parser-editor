@@ -83,7 +83,7 @@ cola
   .size([1200, 800])
   .nodes(graphData.nodes)
   .links(graphData.links)
-  .jaccardLinkLengths(70)
+  .jaccardLinkLengths(100)
   .start();
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var pt = null;

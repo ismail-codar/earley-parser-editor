@@ -24,39 +24,42 @@ export const nodeToGraph = (
   while (childs.length > 0) {
     const child = childs.pop();
     const childsType = child.childsType();
-    nodes.push({
-      name: child.text(),
-      width: child.text().length * 10,
-      height: 20,
-      nodeFill:
-        childsType == "choice"
-          ? "purple"
-          : childsType === "ordered"
-          ? "green"
-          : "navy",
-      labelFill: "white"
-    });
-    if (child.childs) {
-      childs.push.apply(childs, child.childs());
+    const text = child.text();
+    if (nodes.find(n => n.name === text) === undefined) {
+      nodes.push({
+        name: text,
+        width: text.length * 10,
+        height: 20,
+        nodeFill:
+          childsType == "choice"
+            ? "purple"
+            : childsType === "ordered"
+            ? "green"
+            : "navy",
+        labelFill: "white"
+      });
+      if (child.childs) {
+        childs.push.apply(childs, child.childs());
+      }
     }
   }
 
   childs = [data];
   while (childs.length > 0) {
     const child = childs.pop();
-    const childsType = child.childsType();
     if (child.childs) {
       const nodeIdx = nodes.findIndex(n => n.name === child.text());
       const child_childs = child.childs();
       child_childs.forEach((c, i) => {
+        const childIdx = nodes.findIndex(n => n.name === c.text());
         links.push({
           source: nodeIdx,
-          target: nodeIdx + i + 1
+          target: childIdx
         });
       });
       childs.push.apply(childs, child_childs);
     }
   }
 
-  return { nodes, links };
+  return { nodes: nodes.slice(0), links: links.slice(0) };
 };

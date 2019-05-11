@@ -1,7 +1,7 @@
 import { Node } from "./Node";
 import { value } from "@fidanjs/runtime";
 import { ROOT_NODE } from "../store";
-import { Graph } from "./graph/Graph";
+import { Graph } from "./webcola-graph/Graph";
 
 export const Editor = () => {
   console.log(JSON.parse(JSON.stringify(ROOT_NODE(), null, 1)));

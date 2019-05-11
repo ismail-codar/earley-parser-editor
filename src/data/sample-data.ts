@@ -25,7 +25,7 @@ const val = (text: string): INode => {
   };
 };
 
-export const sampleData1 = (): INode => {
+export const sampleData = (): INode => {
   /**
      * https://jsfiddle.net/2mb3w9c1/4/embedded/result/
      * 
@@ -55,25 +55,10 @@ export const sampleData1 = (): INode => {
   ahmet yarın yemek ye ecek
        */
 
-  const YUKLEM_KOK = choice("YUKLEM_KOK", [
-    val("ye"),
-    val("gel"),
-    val("git"),
-    val("otur"),
-    val("kalk"),
-    val("ağla"),
-    val("üzül"),
-    val("sevin")
-  ]);
+  const YUKLEM_KOK = choice("YUKLEM_KOK", []);
 
   // TODO ozne alt grupları
-  const OZNE = choice("OZNE", [
-    val("ahmet"),
-    val("ben"),
-    val("sen"),
-    val("biz"),
-    val("onlar")
-  ]);
+  const OZNE = choice("OZNE", []);
 
   const YUKLEM = choice("YUKLEM", [
     ordered("YUKLEM_GECMIS", [YUKLEM_KOK, val("di")]),
@@ -81,27 +66,18 @@ export const sampleData1 = (): INode => {
     ordered("YUKLEM_SIMDIKI", [YUKLEM_KOK, val("yor")])
   ]);
 
-  const ZAMAN_SIMDI = choice("ZAMAN_SIMDI", [val("şu anda"), val("hemen")]);
-  const ZAMAN_GECMIS = choice("ZAMAN_GECMIS", [
-    val("dün"),
-    val("önceki gün"),
-    val("geçen sene")
-  ]);
-  const ZAMAN_GELECEK = choice("ZAMAN_GELECEK", [val("yarın"), val("ileride")]);
+  const ZAMAN_SIMDI = choice("ZAMAN_SIMDI", []);
+  const ZAMAN_GECMIS = choice("ZAMAN_GECMIS", []);
+  const ZAMAN_GELECEK = choice("ZAMAN_GELECEK", []);
 
-  const BELIRTISIZ_NESNE = choice("BELIRTISIZ_NESNE", [
-    val("yemek"),
-    val("kitap"),
-    val("hasta"),
-    val("masa")
-  ]);
+  const BELIRTISIZ_NESNE = choice("BELIRTISIZ_NESNE", []);
   const BELIRTILI_NESNE = ordered("BELIRTILI_NESNE", [
     BELIRTISIZ_NESNE,
     val("i")
   ]);
 
   const NESNE = choice("NESNE", [BELIRTILI_NESNE, BELIRTISIZ_NESNE]);
-  const YER = choice("YER", [val("ankara"), val("dışarısı"), val("saha")]);
+  const YER = choice("YER", []);
   const ZAMAN = choice("ZAMAN", [ZAMAN_SIMDI, ZAMAN_GECMIS, ZAMAN_GELECEK]);
 
   const YARDIMCI = choice("YARDIMCI", [
@@ -113,19 +89,5 @@ export const sampleData1 = (): INode => {
   return choice("CUMLE", [
     ordered("CUMLE_SADE", [OZNE, YUKLEM]),
     ordered("CUMLE_YARDIMCILI", [OZNE, YARDIMCI, YUKLEM])
-  ]);
-};
-
-export const sampleData = (): INode => {
-  const YUKLEM_KOK = choice("YUKLEM_KOK", [val("ye"), val("gel")]);
-
-  // TODO ozne alt grupları
-  const OZNE = choice("OZNE", [val("ahmet"), val("ben"), val("sen")]);
-
-  const YUKLEM = choice("YUKLEM", []);
-
-  return choice("CUMLE", [
-    ordered("CUMLE_SADE", [OZNE, YUKLEM]),
-    ordered("CUMLE_YARDIMCILI", [])
   ]);
 };

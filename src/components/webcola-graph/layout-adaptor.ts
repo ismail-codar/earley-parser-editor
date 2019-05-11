@@ -1,4 +1,4 @@
-import { Layout, ID3StyleLayoutAdaptor, Event, EventType } from "webcola";
+import { Layout, Event, EventType } from "webcola";
 import { EventEmitter } from "events";
 
 export class LayoutAdaptor extends Layout {
