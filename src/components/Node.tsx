@@ -1,13 +1,16 @@
-import "./node.scss";
-import { FidanValue } from "@fidanjs/runtime";
+import { FidanValue, compute } from "@fidanjs/runtime";
+import { ChildsType } from "../types";
 
 export const Node = (props: {
-  text: string;
-  childsType: FidanValue<"ordered" | "choice">;
+  text: FidanValue<string>;
+  childsType: FidanValue<ChildsType>;
 }) => {
   return (
-    <button className={"btn-small node-" + props.childsType}>
-      {props.text}
-    </button>
+    <input
+      type="text"
+      className={"node-" + props.childsType}
+      value={props.text()}
+      onInput={e => props.text(e.target["value"])}
+    />
   );
 };
