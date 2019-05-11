@@ -1,5 +1,5 @@
 import { LayoutAdaptor } from "./layout-adaptor";
-import { injectToProperty, value, compute, FidanArray } from "@fidanjs/runtime";
+import { inject, value, compute, FidanArray } from "@fidanjs/runtime";
 import { jsxArrayMap } from "@fidanjs/jsx";
 import "./graph.scss";
 import { TEST1 } from "../../_tmp/test1";
@@ -16,11 +16,7 @@ interface IGraphNode {
 
 const GraphNode = (props: IGraphNode) => {
   if (!props.x) return null;
-  const propX = value(props.x);
-  const propY = value(props.y);
-
-  injectToProperty(props, "x", propX);
-  injectToProperty(props, "y", propY);
+  inject(props);
 
   return (
     <g>
@@ -31,15 +27,15 @@ const GraphNode = (props: IGraphNode) => {
         fill={props.nodeFill || "blue"}
         rx="3"
         ry="3"
-        x={compute(() => propX() - props.width / 2)}
-        y={compute(() => propY() - props.height / 2)}
+        x={compute(() => props.x - props.width / 2)}
+        y={compute(() => props.y - props.height / 2)}
       >
         <title>{props.name}</title>
       </rect>
       <text
         className="label"
-        x={propX()}
-        y={compute(() => propY() + 5)}
+        x={props.x}
+        y={compute(() => props.y + 5)}
         fill={props.labelFill || "blue"}
       >
         {props.name}
@@ -50,21 +46,15 @@ const GraphNode = (props: IGraphNode) => {
 
 const GraphLink = (props: { source: IGraphNode; target: IGraphNode }) => {
   if (props.source.x === undefined) return null;
-  const propX1 = value(props.source.x);
-  const propY1 = value(props.source.y);
-  const propX2 = value(props.target.x);
-  const propY2 = value(props.target.y);
-  injectToProperty(props.source, "x", propX1);
-  injectToProperty(props.source, "y", propY1);
-  injectToProperty(props.target, "x", propX2);
-  injectToProperty(props.target, "y", propY2);
+  inject(props.source);
+  inject(props.target);
   return (
     <line
       className="link"
-      x1={propX1()}
-      y1={propY1()}
-      x2={propX2()}
-      y2={propY2()}
+      x1={props.source.x}
+      y1={props.source.y}
+      x2={props.target.x}
+      y2={props.target.y}
     />
   );
 };

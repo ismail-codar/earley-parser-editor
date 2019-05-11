@@ -1,15 +1,12 @@
 .graph {
   .svg {
     border: solid 1px gray;
-    margin-left: 2px;
-    margin-top: 20px;
   }
 
   .node {
     stroke: #fff;
     stroke-width: 1.5px;
     cursor: move;
-    fill: rgb(31, 119, 180);
   }
 
   .link {
@@ -21,7 +18,7 @@
   .label {
     fill: white;
     font-family: Verdana;
-    font-size: 25px;
+    font-size: 12px;
     text-anchor: middle;
     cursor: move;
     user-select: none;

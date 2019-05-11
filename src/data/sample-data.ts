@@ -110,7 +110,7 @@ export const sampleData1 = (): INode => {
     ordered("YARDIMCI_NESNE_ZAMAN", [NESNE, ZAMAN])
   ]);
 
-  return choice("S", [
+  return choice("CUMLE", [
     ordered("CUMLE_SADE", [OZNE, YUKLEM]),
     ordered("CUMLE_YARDIMCILI", [OZNE, YARDIMCI, YUKLEM])
   ]);
@@ -124,7 +124,7 @@ export const sampleData = (): INode => {
 
   const YUKLEM = choice("YUKLEM", []);
 
-  return choice("S", [
+  return choice("CUMLE", [
     ordered("CUMLE_SADE", [OZNE, YUKLEM]),
     ordered("CUMLE_YARDIMCILI", [])
   ]);
