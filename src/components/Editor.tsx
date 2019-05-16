@@ -4,6 +4,14 @@ import { Graph } from "./webcola-graph/Graph";
 import { INode } from "../types";
 import { jsxArrayMap } from "@fidanjs/jsx";
 import "./editor.scss";
+import PouchDB from "pouchdb";
+
+let _inited = false;
+PouchDB.plugin(require("pouchdb-upsert"));
+var grammarDb = new PouchDB("grammar_tr", {
+  revs_limit: 1,
+  auto_compaction: true
+});
 
 const nodeList = (data: INode): INode[] => {
   const nodes = [];
@@ -41,8 +49,31 @@ const addChild = (node: INode) => {
   allNodes(nodeList(ROOT_NODE()));
 };
 
+grammarDb.get("tr").then(doc => {
+  console.log(doc);
+});
+
 const allNodes = value(nodeList(ROOT_NODE())) as FidanArray<INode[]>;
 let lastSelected: INode = null;
+
+const saveGrammar = () => {
+  if (!_inited) return;
+  const arr = JSON.parse(JSON.stringify(allNodes()));
+  grammarDb
+    .upsert("tr", () => {
+      return { data: arr };
+    })
+    .then(function(res) {
+      console.log(res);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+};
+compute(() => saveGrammar(), [allNodes]);
+setTimeout(() => {
+  _inited = true;
+}, 1000);
 
 export const Editor = () => {
   return (
@@ -79,7 +110,10 @@ export const Editor = () => {
                         value={node.text()}
                         size={compute(() => node.text().length + 5)}
                         onFocus={() => node.isSelected(true)}
-                        onBlur={() => node.isSelected(false)}
+                        onBlur={() => {
+                          node.isSelected(false);
+                          saveGrammar();
+                        }}
                         onInput={e => node.text(e.target["value"])}
                       />
                     }
@@ -88,6 +122,7 @@ export const Editor = () => {
                     <select
                       onChange={e => {
                         node.childsType(e.target["value"] as any);
+                        saveGrammar();
                       }}
                     >
                       <option
