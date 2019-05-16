@@ -1,16 +1,30 @@
+import "./editor.scss";
 import { value, FidanArray, compute } from "@fidanjs/runtime";
-import { ROOT_NODE } from "../store";
 import { Graph } from "./webcola-graph/Graph";
 import { INode } from "../types";
 import { jsxArrayMap } from "@fidanjs/jsx";
-import "./editor.scss";
 import PouchDB from "pouchdb";
+import { parse, stringify } from "flatted";
 
 let _inited = false;
 PouchDB.plugin(require("pouchdb-upsert"));
 var grammarDb = new PouchDB("grammar_tr", {
   revs_limit: 1,
   auto_compaction: true
+});
+
+const allNodes = value([]) as FidanArray<INode[]>;
+let lastSelected: INode = null;
+
+grammarDb.get("tr").then(doc => {
+  const fidanKeys = ["text", "childsType", "childs", "isSelected"];
+  const json = parse(doc["data"], (key: string, val: any) => {
+    if (fidanKeys.includes(key) && val !== null && val !== undefined) {
+      return value(val);
+    }
+    return val;
+  });
+  allNodes(nodeList(json));
 });
 
 const nodeList = (data: INode): INode[] => {
@@ -43,22 +57,16 @@ const addChild = (node: INode) => {
           ? node.childs()[node.childs().length - 1].childsType()
           : node.childsType()
       ),
+      isSelected: value(false),
       childs: value([]) as any
     });
   }
-  allNodes(nodeList(ROOT_NODE()));
+  allNodes(nodeList(allNodes()[0]));
 };
-
-grammarDb.get("tr").then(doc => {
-  console.log(doc);
-});
-
-const allNodes = value(nodeList(ROOT_NODE())) as FidanArray<INode[]>;
-let lastSelected: INode = null;
 
 const saveGrammar = () => {
   if (!_inited) return;
-  const arr = JSON.parse(JSON.stringify(allNodes()));
+  const arr = stringify(allNodes()[0]);
   grammarDb
     .upsert("tr", () => {
       return { data: arr };
