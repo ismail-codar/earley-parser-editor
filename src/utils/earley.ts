@@ -23,23 +23,22 @@ export const nodeList = (rootNode: IGrammarNode): IGrammarNode[] => {
 
 export const earleyString = (rootNode: IGrammarNode) => {
   const nodes = nodeList(rootNode);
-  return (
-    "S -> " +
-    nodes
-      .map(node => {
-        if (node.childs && node.childs()) {
-          return (
-            node.text() +
-            " -> " +
-            node
-              .childs()
-              .map(child => child.text())
-              .join(node.childsType() === "ordered" ? " " : " | ")
-          );
-        }
-        return null;
-      })
-      .filter(node => node !== null)
-      .join("\n")
-  );
+  const str = nodes
+    .map(node => {
+      if (node.childs && node.childs()) {
+        return (
+          node.text() +
+          " -> " +
+          node
+            .childs()
+            .map(child => child.text())
+            .join(node.childsType() === "ordered" ? " " : " | ")
+        );
+      }
+      return null;
+    })
+    .filter(node => node !== null)
+    .join("\n");
+
+  return "S -> " + str.substr(str.indexOf("->") + 3);
 };

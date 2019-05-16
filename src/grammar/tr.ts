@@ -31,10 +31,10 @@ export const grammarTr = (): IGrammarNode => {
   ahmet yarın yemek ye ecek
        */
 
-  const YUKLEM_KOK = choice("YUKLEM_KOK", []);
+  const YUKLEM_KOK = choice("YUKLEM_KOK", [val("ye")]);
 
   // TODO ozne alt grupları
-  const OZNE = choice("OZNE", []);
+  const OZNE = choice("OZNE", [val("ahmet")]);
 
   const YUKLEM = choice("YUKLEM", [
     ordered("YUKLEM_GECMIS", [YUKLEM_KOK, val("di")]),
@@ -42,11 +42,11 @@ export const grammarTr = (): IGrammarNode => {
     ordered("YUKLEM_SIMDIKI", [YUKLEM_KOK, val("yor")])
   ]);
 
-  const ZAMAN_SIMDI = choice("ZAMAN_SIMDI", []);
-  const ZAMAN_GECMIS = choice("ZAMAN_GECMIS", []);
-  const ZAMAN_GELECEK = choice("ZAMAN_GELECEK", []);
+  const ZAMAN_SIMDI = choice("ZAMAN_SIMDI", [val("şu an")]);
+  const ZAMAN_GECMIS = choice("ZAMAN_GECMIS", [val("dün")]);
+  const ZAMAN_GELECEK = choice("ZAMAN_GELECEK", [val("yarın")]);
 
-  const BELIRTISIZ_NESNE = choice("BELIRTISIZ_NESNE", []);
+  const BELIRTISIZ_NESNE = choice("BELIRTISIZ_NESNE", [val("yemek")]);
   const BELIRTILI_NESNE = ordered("BELIRTILI_NESNE", [
     BELIRTISIZ_NESNE,
     val("i")
