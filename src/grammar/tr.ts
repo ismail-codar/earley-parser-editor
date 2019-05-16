@@ -1,31 +1,7 @@
-import { INode, ChildsType } from "../types";
-import { value, FidanArray } from "@fidanjs/runtime";
+import { IGrammarNode } from "../types";
+import { choice, ordered, val } from "../utils/grammar";
 
-const choice = (text: string, childs: INode[]): INode => {
-  return {
-    text: value(text),
-    childsType: value<ChildsType>("choice"),
-    childs: value(childs) as FidanArray<INode[]>
-  };
-};
-
-const ordered = (text: string, childs: INode[]): INode => {
-  return {
-    text: value(text),
-    childsType: value<ChildsType>("ordered"),
-    childs: value(childs) as FidanArray<INode[]>
-  };
-};
-
-const val = (text: string): INode => {
-  return {
-    text: value(text),
-    childsType: value<ChildsType>("value"),
-    childs: null
-  };
-};
-
-export const sampleData = (): INode => {
+export const grammarTr = (): IGrammarNode => {
   /**
      * https://jsfiddle.net/2mb3w9c1/4/embedded/result/
      * 

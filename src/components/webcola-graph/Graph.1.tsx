@@ -3,7 +3,7 @@ import { inject, value, compute, FidanArray } from "@fidanjs/runtime";
 import { jsxArrayMap } from "@fidanjs/jsx";
 import "./graph.scss";
 import { nodeToGraph } from "./util";
-import { sampleData } from "../../data/sample-data";
+import { grammarTr } from "../../grammar/tr";
 
 interface IGraphNode {
   x: number;
@@ -64,7 +64,7 @@ const GraphLink = (props: { source: IGraphNode; target: IGraphNode }) => {
 var cola = new LayoutAdaptor(960, 500);
 
 // var graphData = require("./sample-data/fivenodesdisconnected.json");
-const graphData = nodeToGraph(sampleData());
+const graphData = nodeToGraph(grammarTr());
 // cola
 //   .nodes(graphData.nodes)
 //   .links(graphData.links)

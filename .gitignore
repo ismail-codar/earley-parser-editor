@@ -1,6 +1,6 @@
-node_modules
-dist
 .cache
 .yalc
 yarn.lock
 yalc.lock
+dist
+node_modules

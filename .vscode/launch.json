@@ -29,6 +29,21 @@
           {
             "type": "node",
             "request": "launch",
+            "name": "ts-node",
+            "args": [
+              "${file}"
+            ],
+            "runtimeArgs": [
+              "-r",
+              "ts-node/register"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "outputCapture": "console"
+          }
+          {
+            "type": "node",
+            "request": "launch",
             "name": "Debug App",
             "program": "/Users/macbook/DEV/GitHub/earley-parser-editor/node_modules/parcel-bundler/bin/cli.js",
             "env": {

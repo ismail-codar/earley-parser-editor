@@ -1,10 +1,10 @@
 import { FidanValue, FidanArray } from "@fidanjs/runtime";
 
-export type ChildsType = "ordered" | "choice" | "value";
+export type GrammarChildsType = "ordered" | "choice" | "value";
 
-export interface INode {
+export interface IGrammarNode {
   text: FidanValue<string>;
-  childsType: FidanValue<ChildsType>;
-  childs: FidanArray<INode[]>;
+  childsType: FidanValue<GrammarChildsType>;
+  childs: FidanArray<IGrammarNode[]>;
   isSelected?: FidanValue<boolean>;
 }

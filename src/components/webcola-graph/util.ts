@@ -1,4 +1,4 @@
-import { INode } from "../../types";
+import { IGrammarNode } from "../../types";
 
 interface IGraphNode {
   name: string;
@@ -9,7 +9,7 @@ interface IGraphNode {
 }
 
 export const nodeToGraph = (
-  data: INode
+  data: IGrammarNode
 ): {
   nodes: IGraphNode[];
   links: {

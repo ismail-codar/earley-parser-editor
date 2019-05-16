@@ -1,6 +1,6 @@
 import { value } from "@fidanjs/runtime";
-import { INode } from "./types";
-import { sampleData } from "./data/sample-data";
-export const ROOT_NODE = value<INode>(null);
+import { IGrammarNode } from "./types";
+import { grammarTr } from "./grammar/tr";
+export const ROOT_NODE = value<IGrammarNode>(null);
 
-ROOT_NODE(sampleData());
+ROOT_NODE(grammarTr());
