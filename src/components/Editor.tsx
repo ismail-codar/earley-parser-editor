@@ -2,7 +2,6 @@ import "./editor.scss";
 import { value, FidanArray, compute } from "@fidanjs/runtime";
 import { Graph } from "./webcola-graph/Graph";
 import { IGrammarNode } from "../types";
-import { jsxArrayMap } from "@fidanjs/jsx";
 import PouchDB from "pouchdb";
 import { parse, stringify } from "flatted";
 import { nodeList } from "../utils/earley";
@@ -75,117 +74,106 @@ export const Editor = () => {
             <th>Alt Elemenlar</th>
           </tr>
         </thead>
-        <tbody
-          {...jsxArrayMap(
-            allNodes,
-            node => {
-              if (!node.childs) return <></>; // TODO return null
+        <tbody>
+          {allNodes().map(node => {
+            if (!node.childs) return <></>; // TODO return null
 
-              return (
-                <tr
-                  className={compute(() =>
-                    node.childs().find(c => c.isSelected()) !== undefined
-                      ? "any-child-selected-node"
-                      : ""
-                  )}
-                >
-                  <td>
-                    {
-                      <input
-                        type="text"
-                        className={compute(() =>
-                          node.isSelected() ? "selected-input" : ""
-                        )}
-                        value={node.text()}
-                        size={compute(() => node.text().length + 5)}
-                        onFocus={() => node.isSelected(true)}
-                        onBlur={() => {
-                          node.isSelected(false);
-                          saveGrammar();
-                        }}
-                        onInput={e => node.text(e.target["value"])}
-                      />
-                    }
-                  </td>
-                  <td>
-                    <select
-                      onChange={e => {
-                        node.childsType(e.target["value"] as any);
+            return (
+              <tr
+                className={compute(() =>
+                  node.childs().find(c => c.isSelected()) !== undefined
+                    ? "any-child-selected-node"
+                    : ""
+                )}
+              >
+                <td>
+                  {
+                    <input
+                      type="text"
+                      className={compute(() =>
+                        node.isSelected() ? "selected-input" : ""
+                      )}
+                      value={node.text()}
+                      size={compute(() => node.text().length + 5)}
+                      onFocus={() => node.isSelected(true)}
+                      onBlur={() => {
+                        node.isSelected(false);
                         saveGrammar();
                       }}
-                    >
-                      <option
-                        value="ordered"
-                        selected={node.childsType() === "ordered"}
-                      >
-                        Sıralı -
-                      </option>
-                      <option
-                        value="choice"
-                        selected={node.childsType() === "choice"}
-                      >
-                        Seçim |
-                      </option>
-                    </select>
-                  </td>
-                  <td>
-                    <span
-                      {...jsxArrayMap(
-                        node.childs,
-                        child => {
-                          return (
-                            <span>
-                              <span
-                                onClick={() => {
-                                  if (lastSelected)
-                                    lastSelected.isSelected(false);
-                                  child.isSelected(true);
-                                  lastSelected = child;
-                                }}
-                                className={compute(() =>
-                                  child.isSelected() ? "selected-node" : ""
-                                )}
-                              >
-                                {child.text()}
-                              </span>
-                              <span style={{ fontSize: "40px" }}>
-                                {compute(() => {
-                                  return node.childsType() === "choice"
-                                    ? " | "
-                                    : " _ ";
-                                })}
-                              </span>
-                              {/* TODO <span>
-                                {compute(() => {
-                                  return node.childsType() === "choice" ? (
-                                    <span> | </span>
-                                  ) : (
-                                    <span> -> </span>
-                                  );
-                                })}
-                              </span>
-                              <span>
-                                {node.childsType() === "choice" ? " | " : " - "}
-                              </span> */}
-                            </span>
-                          ) as any;
-                        },
-                        "reconcile"
-                      )}
+                      onInput={e => node.text(e.target["value"])}
                     />
-                    <button
-                      className={"btn-small"}
-                      onClick={() => addChild(node)}
+                  }
+                </td>
+                <td>
+                  <select
+                    onChange={e => {
+                      node.childsType(e.target["value"] as any);
+                      saveGrammar();
+                    }}
+                  >
+                    <option
+                      value="ordered"
+                      selected={node.childsType() === "ordered"}
                     >
-                      +
-                    </button>
-                  </td>
-                </tr>
-              ) as any;
-            },
-            "reconcile"
-          )}
-        />
+                      Sıralı -
+                    </option>
+                    <option
+                      value="choice"
+                      selected={node.childsType() === "choice"}
+                    >
+                      Seçim |
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  {node.childs().map(child => {
+                    return (
+                      <span>
+                        <span
+                          onClick={() => {
+                            if (lastSelected) lastSelected.isSelected(false);
+                            child.isSelected(true);
+                            lastSelected = child;
+                          }}
+                          className={compute(() =>
+                            child.isSelected() ? "selected-node" : ""
+                          )}
+                        >
+                          {child.text()}
+                        </span>
+                        <span style={{ fontSize: "40px" }}>
+                          {compute(() => {
+                            return node.childsType() === "choice"
+                              ? " | "
+                              : " _ ";
+                          })}
+                        </span>
+                        {/* TODO <span>
+                              {compute(() => {
+                                return node.childsType() === "choice" ? (
+                                  <span> | </span>
+                                ) : (
+                                  <span> -> </span>
+                                );
+                              })}
+                            </span>
+                            <span>
+                              {node.childsType() === "choice" ? " | " : " - "}
+                            </span> */}
+                      </span>
+                    );
+                  })}
+                  <button
+                    className={"btn-small"}
+                    onClick={() => addChild(node)}
+                  >
+                    +
+                  </button>
+                </td>
+              </tr>
+            ) as any;
+          })}
+        </tbody>
       </table>
       <Graph />
     </div>

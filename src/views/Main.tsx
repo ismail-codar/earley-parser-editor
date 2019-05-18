@@ -1,5 +1,15 @@
 import { Editor } from "../components/Editor";
 import "./main.scss";
+import { value, FidanArray } from "@fidanjs/runtime";
+
+const arr = value([1, 2, 4, 5, 6]) as FidanArray<number[]>;
+
+setTimeout(() => {
+  arr().push(7);
+  setTimeout(() => {
+    arr().push(8);
+  }, 2000);
+}, 2000);
 
 export const Main = () => {
   return (

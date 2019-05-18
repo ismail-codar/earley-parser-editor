@@ -1,6 +1,5 @@
 import { LayoutAdaptor } from "./layout-adaptor";
 import { injectToProperty, value, compute, FidanArray } from "@fidanjs/runtime";
-import { jsxArrayMap } from "@fidanjs/jsx";
 import "./graph.scss";
 import { nodeToGraph } from "./util";
 import { grammarTr } from "../../grammar/tr";
@@ -149,12 +148,12 @@ export const Graph = () => {
         width="100%"
         height="800"
       >
-        <g
-          {...jsxArrayMap(links, (link: any) => <GraphLink {...link} /> as any)}
-        />
-        <g
-          {...jsxArrayMap(nodes, (node: any) => <GraphNode {...node} /> as any)}
-        />
+        {links().map(link => (
+          <GraphLink {...link} />
+        ))}
+        {nodes().map(node => (
+          <GraphNode {...node} />
+        ))}
         <defs>
           <marker
             id="end-arrow"
