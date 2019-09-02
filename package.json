@@ -13,9 +13,9 @@
     "yalc-link": "yalc link @fidanjs/runtime & yalc link @fidanjs/jsx & yalc link @fidanjs/babel-plugin-fidan-jsx & yalc link @fidanjs/integration-react"
   },
   "dependencies": {
-    "@fidanjs/babel-plugin-fidan-jsx": "^0.0.7",
-    "@fidanjs/jsx": "^0.0.7",
-    "@fidanjs/runtime": "^0.0.22",
+    "@fidanjs/babel-plugin-fidan-jsx": "latest",
+    "@fidanjs/jsx": "latest",
+    "@fidanjs/runtime": "latest",
     "@types/classnames": "^2.2.7",
     "@types/pouchdb": "^6.3.3",
     "@types/pouchdb-upsert": "^2.2.6",
